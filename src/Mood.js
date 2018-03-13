@@ -97,10 +97,11 @@ export default class Mood extends React.Component {  // Теперь не над
    }
    displayTime () {
      let TimeSmile;
-     if(!this.state.ChekTimeGoodBad)
      return TimeSmile = <h1> "хорошее:  "  {this.state.displayTimeGoodNew}  <br></br>  "Плохое:  " {this.state.displayTimeBadNew} </h1>;
    }
-
+   componentDidMount() {
+         setInterval(() => this.summa(), 1000);
+       }
 	render () {
 		return(
 			<div>
