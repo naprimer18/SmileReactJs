@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './bad.css';
 import './good.css';
+import Comment from './Comment.js'
 
 var isCountingStarted = 0;
 var isCountingGood = 1;
@@ -14,7 +15,6 @@ export default class Mood extends React.Component {  // Теперь не над
    super(props);
    this.state = {flagGood: "false", displayTimeGoodNew: " "};
    this.state = {flagBad: "false", displayTimeBadNew: " "};
-   this.state = {ChekTimeGoodBad: "false"};
    this.timeGood = this.timeGood.bind(this);
    this.timeBad = this.timeBad.bind(this);
    this.summa = this.summa.bind(this);
@@ -65,20 +65,19 @@ export default class Mood extends React.Component {  // Теперь не над
 
    summa() {                                                      // подсчет времени
      var currentTime = new Date();
-     if (isCountingStarted == 1) {
-       if (isCountingGood == 0) {
+     if (isCountingStarted === 1) {
+       if (isCountingGood === 0) {
          sumBad += this.timeInSeconds(currentTime) - beginTimeBad;
          beginTimeBad = this.timeInSeconds(currentTime);
        }
 
-       if (isCountingGood == 1) {
+       if (isCountingGood === 1) {
          sumGood += this.timeInSeconds(currentTime) - beginTimeGood;
          beginTimeGood = this.timeInSeconds(currentTime);
        }
       }
         this.setState({displayTimeGoodNew:this.secondsToTime(sumGood)});
         this.setState({displayTimeBadNew:this.secondsToTime(sumBad)});
-        this.setState({ChekTimeGoodBad:!this.state.ChekTimeGoodBad});
    }
 
    displaySmileGood () {
@@ -90,15 +89,12 @@ export default class Mood extends React.Component {  // Теперь не над
    }
    displaySmileBad () {
      var  dropdownTextBad;
-     if (this.state.flagBad) {
+     if (!this.state.flagBad) {
        dropdownTextBad = <div><img  width="100%" height="100%" src="https://avatars.mds.yandex.net/get-pdb/25978/5c1493a0-caff-45a9-82ee-8351e8b10eb8/s800" /></div>;
        return dropdownTextBad;
      }
    }
-   displayTime () {
-     let TimeSmile;
-     return TimeSmile = <h1> "хорошее:  "  {this.state.displayTimeGoodNew}  <br></br>  "Плохое:  " {this.state.displayTimeBadNew} </h1>;
-   }
+
    componentDidMount() {
          setInterval(() => this.summa(), 1000);
        }
@@ -108,15 +104,14 @@ export default class Mood extends React.Component {  // Теперь не над
         <div className="comp1" onClick = {this.timeGood}>
             <h1> Good </h1>
             {this.displaySmileGood()}
+             {this.state.displayTimeGoodNew}
         </div>
         <div className="comp2" onClick = {this.timeBad}>
             <h1> Bad </h1>
             {this.displaySmileBad()}
+            {this.state.displayTimeBadNew}
         </div>
-        <div className="comp2" onClick = {this.summa}>
-            <h1> check_time </h1>
-            {this.displayTime()}
-        </div>
-			</div>);
+        <Comment good = {this.state.displayTimeGoodNew}  bad = {this.state.displayTimeBadNew} />
+    	</div>);
 	}
 }

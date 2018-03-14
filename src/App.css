@@ -2,6 +2,19 @@
 @media screen and (max-width: 640px)  { *{font-size:45%;} }
 @media screen and (max-width: 1024px) { *{font-size:85%;} }
 
+* {
+  color :black;
+  font-family : 'Comic Sans MS, Lucida Handwriting, cursive';
+  font-size : 1em;
+
+
+
+
+      
+
+
+
+}
 button{
   position: relative;
   display: inline-block;

@@ -8,7 +8,6 @@ class App extends Component {
     return (
       <div>
         <Mood />
-        <Comment />
       </div>
           );
   }
