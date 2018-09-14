@@ -14,14 +14,14 @@ export default class Comment extends React.Component {
         return (
           <div className="name_2">
             <List items={this.state.items} />
-            <form>
-              <button onClick={this.handleSubmit}>
+              
+            
+            <button onClick={this.handleSubmit}>
                 Записать
               </button>
               <button onClick={this.delTime.bind(this)}>
                 удалить
               </button>
-            </form>
           </div>);
       }
 
